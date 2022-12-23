@@ -6,6 +6,8 @@ import CreateAdBanner from './components/CreateAdBanner';
 import GameBanner from "./components/GameBanner";
 import { CreateAdModal } from './components/form/CreateAdModal';
 import axios from 'axios';
+import CreateGameBanner from './components/CreateGameBanner';
+import { CreateGameModal } from './components/form/CreateGameModal';
 
 export interface Game {
   id: string;
@@ -51,7 +53,12 @@ function App() {
         <CreateAdBanner/>
 
         <CreateAdModal/>
-        
+      </Dialog.Root>
+      
+      <Dialog.Root>
+        <CreateGameBanner />
+
+        <CreateGameModal />
       </Dialog.Root>
       
     </div>
