@@ -27,6 +27,47 @@ app.get('/games', async (request, response) => {
     return response.json(games);
 });
 
+app.get('/games/:id', async (request, response) => {
+    const gameId = request.params.id;
+
+    const game = await prisma.game.findUnique({
+        where: {
+            id: gameId
+        },
+        include: {
+            ads: {
+                select: {
+                    id: true,
+                    name: true,
+                    yearsPlaying : true,
+                    weekdays: true,
+                    hoursStart: true,
+                    hoursEnd : true,
+                    useVoiceChannel: true,
+                },
+                orderBy: {
+                    createdAt: "desc"
+                }
+            }
+        }
+    });
+
+    if (!game) {
+        return response.status(404).json({ message: "Jogo não encontrado!" });
+    }
+
+    return response.json({
+        ...game,
+        ads: game.ads.map(ad => ({
+            ...ad,
+            weekdays: ad.weekdays.split(","),
+            hoursStart: convertMinutesForHours(ad.hoursStart),
+            hoursEnd: convertMinutesForHours(ad.hoursEnd),
+        }))
+    });
+});
+
+
 app.post('/games', async (request, response) => {
     const body: any = request.body;
 
