@@ -13,8 +13,6 @@ export interface Game {
     }
 
 export function CreateGameModal() {
-    const [weekDays, setWeekDays] = useState<string[]>([])
-    const [useVoiceChannel, setUseVoiceChannel] = useState(false);
     const [games, setGames] = useState<Game[]>([]);
 
     useEffect(() => {
@@ -28,21 +26,28 @@ export function CreateGameModal() {
         const formData = new FormData(event.target as HTMLFormElement);
         const data = Object.fromEntries(formData);
 
-        if (!data.name) {
+        if (!data.game) {
             alert('Nome é obrigatório');
             return;
         }
+        if (!data.linkFoto) {
+            alert('Link da foto é obrigatório');
+            return;
+        }
+        if (data.game) {
+            const gameExists = games.find(game => game.title === data.game);
+            if (gameExists) {
+                alert('Jogo já cadastrado');
+                return;
+            }
+        }
 
         try {
-            await axios.post(`http://localhost:3030/games/`, {
+            await axios.post(`http://localhost:3030/games`, {
                 
-                name: data.name,
-                yearsPlaying: Number(data.yearsPlayed),
-                discord: data.discord,
-                weekdays: weekDays.map(Number),
-                hoursStart: data.hoursStart,
-                hoursEnd: data.hoursEnd,
-                useVoiceChannel: useVoiceChannel,
+                title: data.game,
+                bannerUrl: data.linkFoto,
+            
             })
             alert('Anúncio criado com sucesso!')
         } catch (error) {
@@ -63,11 +68,11 @@ export function CreateGameModal() {
                 <form onSubmit={handleCreateGame} action="" className=" text-white mt-4 flex flex-col gap-4 w-full">
                     <div className='flex flex-col  gap-2'>
                         <label htmlFor="game" className="font-semibold">Qual o game?</label>
-                        <Input type="text" name="name" id="game" placeholder='Nome do Jogo' />
+                        <Input type="text" name="game" id="game" placeholder='Nome do Jogo' />
                     </div>
                     <div className='flex flex-col  gap-2'>
                         <label htmlFor="linkFoto" className="font-semibold">O link da foto</label>
-                        <Input type="text" name="linkFoto" id="title" placeholder='Link da foto' />
+                        <Input type="text" name="linkFoto" id="linkFoto" placeholder='Link da foto' />
                     </div>
 
 
