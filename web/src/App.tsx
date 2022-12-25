@@ -1,5 +1,6 @@
 import* as Dialog from '@radix-ui/react-dialog';
 import { useState, useEffect } from 'react';
+import { Carousel, ScrollingCarousel  } from '@trendyol-js/react-carousel';
 
 import logoImg from './assets/logo.svg'
 import CreateAdBanner from './components/CreateAdBanner';
@@ -35,20 +36,20 @@ function App() {
         Seu <span className='bg-nlw-gradient bg-clip-text text-transparent'>dou</span> esta aqui.
       </h1>
 
-      <div className='grid grid-cols-6 gap-6 mt-16'>
-
-        {games.map(game => {
+      <div className=' mt-16'>
+      <ScrollingCarousel   className="gap-4 flex" >
+      {games.map(game => {
           return (
             <GameBanner  
               key={game.id}
               bannerUrl={game.bannerUrl}
               gameName={game.title}
               adsCount={game._count.ads} 
-              id={''}              
+              id={game.id}              
               />
           )
         })}
-
+      </ScrollingCarousel >
       </div>
       <Dialog.Root>
         <CreateAdBanner/>
@@ -64,6 +65,7 @@ function App() {
       
     </div>
   )
+  
 }
 
 export default App

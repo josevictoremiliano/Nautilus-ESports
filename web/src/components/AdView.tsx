@@ -1,31 +1,63 @@
 import { FormEvent, useEffect, useState } from "react";
 import axios from "axios";
-import * as Dialog from "@radix-ui/react-dialog";
 
 interface Game {
   id: string;
   title: string;
   bannerUrl: string;
 }
+interface Ads {
+  name: string,
+  yearsPlaying: string,
+  discord: string,
+  weekDays: number,
+  hourStart: string,
+  hourEnd: string,
+  useVoiceChannel: boolean
+}
 
-export default function AdView(props : Game  ) {
-  const [game, setGame] = useState<Game>({} as Game);
+interface AdViewProps {
+  ad: Ads;
+}
+export default function AdView({ ad }: AdViewProps) {
+  const [ads, setAds] = useState<AdViewProps[]>([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3030/games/${game}`).then((response) => {
-      setGame(response.data);
+    const gameId = window.location.pathname.split('/')[2]
+    axios.get(`http://localhost:3030/games/${gameId}/ads`).then((response) => {
+      setAds(response.data);
     });
   }, []);
 
+  
   return (
-    <Dialog.Portal>
-      <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
+    <div className="bg-[#2A2634] px-8 py-6 flex justify-between items-center rounded-md">
+      <div>
+        <strong className="text-2xl text-white font-black block">
+          {ad.name}
+        </strong>
+        <span className="text-zinc-400 block">
+          Jogando a {ad.yearsPlaying} anos
+        </span>
+        <span className="text-zinc-400 block">
+          Discord: {ad.discord}
+        </span>
+        <span className="text-zinc-400 block">
+          {ad.weekDays}
+        </span>
+        <span className="text-zinc-400 block">
+          {ad.hourStart}
+        </span>
+        <span className="text-zinc-400 block">
+          {ad.hourEnd}
+        </span>
+        <span className="text-zinc-400 block">
+          {ad.useVoiceChannel}
+        </span>
+      </div>
 
-      <Dialog.Content className="fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[480px] shadow-lg shadow-black/25">
-        <Dialog.Title className="text-3xl font-black">
-          Vendo os anúncios do jogo {game.title}
-        </Dialog.Title>
-      </Dialog.Content>
-    </Dialog.Portal>
+
+
+    </div>
   );
 }

@@ -42,14 +42,17 @@ export function CreateGameModal() {
             }
         }
 
+
         try {
+            window.location.reload();
             await axios.post(`http://localhost:3030/games`, {
                 
                 title: data.game,
                 bannerUrl: data.linkFoto,
-            
+                
             })
             alert('Anúncio criado com sucesso!')
+
         } catch (error) {
             alert('Erro ao criar anúncio!')
         }
@@ -80,7 +83,7 @@ export function CreateGameModal() {
                         <Dialog.Close type='button' className='bg-zinc-500 text-white font-semibold py-2 px-5 h-12 rounded-md hover:bg-zinc-600'>
                             Cancelar
                         </Dialog.Close>
-                        <button type='submit' className='bg-violet-500 font-semibold px-5 h-12 rounded-md flex items-center gap-3 hover:bg-violet-600'>
+                        <button type='submit'  className='bg-violet-500 font-semibold px-5 h-12 rounded-md flex items-center gap-3 hover:bg-violet-600'>
                             <GameController className="self-center  w-6 h-6" />
                             Cadastrar
                         </button>

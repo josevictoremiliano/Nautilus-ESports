@@ -46,6 +46,8 @@ export function CreateAdModal() {
       });
 
       alert('Anúncio criado com sucesso!');
+
+      window.location.reload();
     } catch (err) {
       console.log(err);
       alert('Erro ao criar anúncio!');
