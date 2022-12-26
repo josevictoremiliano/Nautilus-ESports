@@ -44,6 +44,7 @@ app.get('/games/:id', async (request, response) => {
                     hoursStart: true,
                     hoursEnd : true,
                     useVoiceChannel: true,
+                    discord: true,
                 },
                 orderBy: {
                     createdAt: "desc"
@@ -115,6 +116,7 @@ app.get("/games/:id/ads", async (request, response) => {
             hoursStart: true,
             hoursEnd : true,
             useVoiceChannel: true,
+            discord: true,
         },
         where: {
             gameId
