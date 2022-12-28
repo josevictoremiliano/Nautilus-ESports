@@ -50,18 +50,18 @@ export default function AdsPage() {
         <div className="max-w-[1344px] mx-auto flex items-center flex-col my-10">
             <img src={logoImg} alt="Logo" className='max-w-[250px]' />
 
-            <div className='flex gap-2'>
-                <a href="/" className='btn bg-violet-700 hover:bg-violet-500 rounded-md p-2 flex gap-1 justify-center self-center text-center'>
+            <div className='flex gap-4 sm:flex-col md:flex-row container  md:justify-center sm:justify-start'>
+                <a href="/" className='btn bg-yellow-500 hover:bg-yellow-400 rounded-md p-2 flex gap-1 justify-center self-center text-center'>
                     <ArrowCircleLeft className='text-2xl' />
                     Voltar
                 </a>
-            <h1 className="text-3xl font-black text-white ">
-                Você esta vendo os anuncios do jogo <span className='bg-nlw-gradient bg-clip-text text-transparent'>{game.title}</span>
-            </h1>
+                <h1 className="text-3xl font-black text-white ">
+                    Você esta vendo os anuncios do jogo <span className='bg-nlw-gradient bg-clip-text text-transparent'>{game.title}</span>
+                </h1>
 
             </div>
         
-            <div className=' mt-16 flex gap-3'>
+            <div className=' mt-16 grid grid-flow-col grid-cols-6  gap-3'>
                     {ads.map((ad: Ads) => (
                         <AdView ad={ad} />  
                     ))}

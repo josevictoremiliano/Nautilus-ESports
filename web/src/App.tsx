@@ -33,7 +33,7 @@ function App() {
       <img src={logoImg} alt="Logo"  className='max-w-[250px]'/>
 
       <h1 className="text-6xl font-black text-white ">
-        Seu <span className='bg-nlw-gradient bg-clip-text text-transparent'>dou</span> esta aqui.
+        Seu <span className='bg-nlw-gradient bg-clip-text text-transparent'>duo</span> esta aqui.
       </h1>
 
       <div className=' mt-16'>
