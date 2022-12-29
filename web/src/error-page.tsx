@@ -18,7 +18,7 @@ export default function ErrorPage() {
         <p className='bg-nlw-gradient bg-clip-text text-transparent text-6xl px-2 '>
           <i>{error.statusText || error.message} </i>
         </p>
-        <a href="/" className="bg-violet-500 hover:bg-violet-700 py-2 px-4 rounded-full mt-5"> Voltar</a>
+        <a href="/" className="bg-amber-500 hover:bg-amber-700 py-2 px-4 rounded-md"> Voltar</a>
       </div>      
     </div>
   );
