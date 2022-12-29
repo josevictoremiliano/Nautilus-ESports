@@ -2,7 +2,6 @@ import { useRouteError } from "react-router-dom";
 import logoImg from './assets/logo.svg'
 
 export default function ErrorPage() {
-  //error vindo de useRouteError tipado
   const error = useRouteError() as { message: string; statusText: string;};
 
 
