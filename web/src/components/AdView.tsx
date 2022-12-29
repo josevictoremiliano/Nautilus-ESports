@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useState } from "react";
 import axios from "axios";
+import { CopySimple } from "phosphor-react";
 
 interface Game {
   id: string;
@@ -74,8 +75,8 @@ export default function AdView({ ad }: AdViewProps) {
         <span className="text-zinc-400 block mt-2">
           Discord
         </span>
-        <a className="text-zinc-400 block hover:text-zinc-100 hover:cursor-pointer" onClick={handleCopyClick} >
-          <span className="text-white hover:text-yellow-300">{ad.discord}</span>
+        <a className="text-zinc-400 block hover:text-zinc-100 hover:cursor-pointer flex gap-2 text-center content-center" onClick={handleCopyClick} >
+          <span className="text-white hover:text-yellow-300 flex gap-2">{ad.discord} <CopySimple className="text-lg pt-1"/> </span> 
         </a>
 
       </div>
